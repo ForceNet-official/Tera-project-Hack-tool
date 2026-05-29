@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ForceNet - HACK TOOL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #da0066, #20003d);
+            min-height: 100vh;
+            font-family: 'Poppins', 'Orbitron', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* Бургер */
+        .burger {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .burger span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        /* Панель справа */
+        .sidepanel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 360px;
+            height: 100vh;
+            background: rgba(8, 8, 18, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1002;
+            transition: right 0.4s ease-out;
+            padding: 80px 24px 40px;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.6);
+            overflow-y: auto;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidepanel.open {
+            right: 0;
+        }
+        .close-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .sidepanel h3 {
+            color: #ff66aa;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-left: 3px solid #ff66aa;
+            padding-left: 12px;
+        }
+        .sidepanel p {
+            color: #bbb;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+        .sidepanel .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .sidepanel .feature-list li {
+            color: #ccc;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-family: monospace;
+        }
+        .sidepanel .feature-list li::before {
+            content: "— ";
+            color: #ff66aa;
+        }
+
+        /* Основной контент */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+        }
+
+        /* Круг с телегой + кнопка */
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .tg-circle {
+            width: 75px;
+            height: 75px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .tg-circle:active {
+            transform: scale(0.94);
+        }
+        .tg-circle img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        .download-apk {
+            background: linear-gradient(135deg, #00ffaa, #00aa77);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: monospace;
+            transition: 0.2s;
+        }
+        .download-apk:active {
+            transform: scale(0.97);
+        }
+
+        /* Заголовок */
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.5rem);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 900;
+        }
+        .hack-badge {
+            display: inline-block;
+            background: #ff0033;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 12px 0 8px;
+        }
+        .only-android {
+            color: #ff88bb;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* Сетка функций */
+        .functions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 30px 0;
+        }
+        .func-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: monospace;
+        }
+        .func-name {
+            color: #00ffcc;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .func-action {
+            color: #aaa;
+            font-size: 0.75rem;
+        }
+
+        /* TERA внизу */
+        .tera {
+            text-align: center;
+            margin-top: 70px;
+            font-size: clamp(3rem, 13vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #3399ff, #001a66);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 10px;
+        }
+
+        /* подвал */
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Бургер -->
+    <div class="burger" id="burgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Панель -->
+    <div class="sidepanel" id="sidePanel">
+        <button class="close-panel" id="closePanelBtn">✕</button>
+        <h3>ForceNet</h3>
+        <p>Приложение принадлежит компании <strong>ForceNet</strong> из раздела продукции <strong>Tera project</strong>.</p>
+        <p>Хакерский инструмент, основанный на следующих функциях:</p>
+        <ul class="feature-list">
+            <li>Шифровка файлов</li>
+            <li>Дешифровка файлов</li>
+            <li>Стресс тест сайтов</li>
+            <li>Информация о телефоне</li>
+            <li>OSINT</li>
+            <li>Клонирование сайтов</li>
+        </ul>
+        <p style="margin-top: 20px; font-size:0.8rem;">⚠️ Только для образовательных целей</p>
+    </div>
+
+    <div class="container">
+        <!-- Круг + скачивание -->
+        <div class="action-row">
+            <div class="tg-circle" id="tgCircle">
+                <img src="tg.png" alt="tg" onerror="this.src='https://telegram.org/favicon.ico'">
+            </div>
+            <button class="download-apk" id="downloadBtn">⬇️ СКАЧАТЬ .APK</button>
+        </div>
+
+        <!-- Заголовок -->
+        <h1>ForceNet</h1>
+        <div class="hack-badge">HACK TOOL</div>
+        <div class="only-android">only android</div>
+
+        <!-- Список функций -->
+        <div class="functions">
+            <div class="func-card"><span class="func-name">⚡ Stress test</span><span class="func-action">нагрузка</span></div>
+            <div class="func-card"><span class="func-name">🔒 Encrypt</span><span class="func-action">шифровка</span></div>
+            <div class="func-card"><span class="func-name">🔓 Decrypt</span><span class="func-action">дешифровка</span></div>
+            <div class="func-card"><span class="func-name">📠 Copy site</span><span class="func-action">клон сайта</span></div>
+            <div class="func-card"><span class="func-name">📱 Device info</span><span class="func-action">инфо об устройстве</span></div>
+            <div class="func-card"><span class="func-name">🕵️ OSINT</span><span class="func-action">сбор данных</span></div>
+        </div>
+
+        <!-- TERA внизу -->
+        <div class="tera">TERA</div>
+        <div class="footer-note">HACK TOOL // telegram</div>
+    </div>
+
+    <script>
+        // Бургер
+        const burger = document.getElementById('burgerBtn');
+        const panel = document.getElementById('sidePanel');
+        const closeBtn = document.getElementById('closePanelBtn');
+
+        function openPanel() {
+            panel.classList.add('open');
+        }
+        function closePanel() {
+            panel.classList.remove('open');
+        }
+        burger.addEventListener('click', openPanel);
+        closeBtn.addEventListener('click', closePanel);
+        // клик вне панели (по фону) не закрывает, только крестик
+
+        // Скачивание .apk
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = 'HACK TOOL.apk';
+            link.download = 'HACK TOOL.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Нажатие на круг с телегой
+        const tgCircle = document.getElementById('tgCircle');
+        tgCircle.addEventListener('click', () => {
+            window.open('https://t.me/tera', '_blank');
+        });
+    </script>
+</body>
+</html>
