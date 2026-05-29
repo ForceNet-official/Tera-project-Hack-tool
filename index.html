@@ -247,7 +247,6 @@
             <li>OSINT</li>
             <li>Клонирование сайтов</li>
         </ul>
-        <p style="margin-top: 20px; font-size:0.8rem;">⚠️ Только для образовательных целей</p>
     </div>
 
     <div class="container">
@@ -293,7 +292,6 @@
         }
         burger.addEventListener('click', openPanel);
         closeBtn.addEventListener('click', closePanel);
-        // клик вне панели (по фону) не закрывает, только крестик
 
         // Скачивание .apk
         const downloadBtn = document.getElementById('downloadBtn');
@@ -306,10 +304,10 @@
             document.body.removeChild(link);
         });
 
-        // Нажатие на круг с телегой
+        // Нажатие на круг с телегой → переход в канал @ForceNetProject
         const tgCircle = document.getElementById('tgCircle');
         tgCircle.addEventListener('click', () => {
-            window.open('https://t.me/tera', '_blank');
+            window.open('https://t.me/ForceNetProject', '_blank');
         });
     </script>
 </body>
