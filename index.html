@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ForceNet — HACK TOOL</title>
     <style>
-        /* СБРОС И БАЗА */
         * {
             margin: 0;
             padding: 0;
@@ -14,25 +13,24 @@
         }
 
         body {
-            /* НОВЫЙ ГРАДИЕНТ: более темные оттенки + плавный переход по середине экрана */
-            background: linear-gradient(145deg, #0a0a1a 0%, #13112b 45%, #09090f 100%);
+            /* Более тёмные тона + градиент с плавным переходом в середине (не ломается на телефоне) */
+            background: linear-gradient(145deg, #0a0a1a 0%, #13112b 45%, #060510 100%);
             background-attachment: fixed;
             min-height: 100vh;
-            font-family: 'Inter', 'SF Pro Text', 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
             color: #eef2ff;
         }
 
-        /* КРАСИВЫЙ ШРИФТ — подключаем Inter и Orbitron для акцентов */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Orbitron:wght@400;600;700;800;900&display=swap');
 
-        /* БУРГЕР-МЕНЮ (темнее + стильно) */
+        /* Бургер (тёмный стиль) */
         .burger {
             position: fixed;
             top: 20px;
             right: 20px;
             width: 52px;
             height: 52px;
-            background: rgba(12, 12, 22, 0.75);
+            background: rgba(12, 12, 22, 0.8);
             backdrop-filter: blur(12px);
             border-radius: 24px;
             display: flex;
@@ -42,20 +40,19 @@
             gap: 7px;
             cursor: pointer;
             z-index: 1001;
-            border: 1px solid rgba(100, 120, 255, 0.25);
+            border: 1px solid rgba(100, 120, 255, 0.3);
             transition: 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .burger:active { transform: scale(0.94); background: rgba(30,30,55,0.9);}
+        .burger:active { transform: scale(0.94); background: rgba(30,30,55,0.95);}
         .burger span {
             width: 26px;
             height: 2.5px;
             background: #d0d9ff;
             border-radius: 4px;
-            transition: 0.2s;
         }
 
-        /* САЙД-ПАНЕЛЬ (очень тёмная) */
+        /* Сайд-панель */
         .sidepanel {
             position: fixed;
             top: 0;
@@ -63,18 +60,16 @@
             width: 86%;
             max-width: 370px;
             height: 100vh;
-            background: rgba(3, 3, 12, 0.96);
+            background: rgba(3, 3, 12, 0.97);
             backdrop-filter: blur(28px);
             z-index: 1002;
             transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             padding: 85px 24px 40px;
             overflow-y: auto;
-            border-left: 1px solid rgba(80, 100, 220, 0.4);
+            border-left: 1px solid rgba(80, 100, 220, 0.5);
             box-shadow: -10px 0 35px rgba(0, 0, 0, 0.7);
         }
-        .sidepanel.open {
-            right: 0;
-        }
+        .sidepanel.open { right: 0; }
         .close-panel {
             position: absolute;
             top: 22px;
@@ -91,7 +86,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.15s;
         }
         .close-panel:active { background: rgba(255,255,255,0.1);}
         .sidepanel h3 {
@@ -109,7 +103,6 @@
             line-height: 1.55;
             font-size: 0.9rem;
             margin-bottom: 18px;
-            font-weight: 400;
         }
         .sidepanel .feature-list {
             list-style: none;
@@ -130,14 +123,13 @@
             font-size: 0.7rem;
         }
 
-        /* ОСНОВНОЙ КОНТЕЙНЕР */
         .container {
             max-width: 620px;
             margin: 0 auto;
             padding: 70px 22px 100px;
         }
 
-        /* РЯД: телеграм круг (во весь круг) + кнопка */
+        /* Ряд: телеграм круг + кнопка */
         .action-row {
             display: flex;
             align-items: center;
@@ -145,7 +137,7 @@
             margin-bottom: 45px;
             flex-wrap: wrap;
         }
-        /* ЛОГОТИП ТЕЛЕГРАМА — размером ВО ВЕСЬ КРУГ */
+        /* Круг с телеграм-лого (изображение .png или .jpg занимает весь круг) */
         .tg-circle {
             width: 80px;
             height: 80px;
@@ -156,26 +148,21 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.2s ease;
-            border: 1.5px solid rgba(90, 150, 255, 0.55);
+            border: 1.5px solid rgba(90, 150, 255, 0.6);
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            backdrop-filter: blur(4px);
+            overflow: hidden;
         }
-        .tg-circle:active {
-            transform: scale(0.92);
-            background: #1c1c2e;
-        }
-        /* КЛЮЧЕВОЙ МОМЕНТ: img занимает 100% круга, но аккуратно */
         .tg-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
             display: block;
         }
+        .tg-circle:active { transform: scale(0.92); background: #1c1c2e;}
 
-        /* НОВАЯ КНОПКА СКАЧИВАНИЯ — ТЕМНО-ЗЕЛЕНАЯ */
+        /* Кнопка скачать — тёмно-зелёная */
         .download-apk {
-            background: linear-gradient(115deg, #0b4428, #0a3a22);
+            background: linear-gradient(115deg, #0b4428, #09351f);
             border: none;
             padding: 14px 32px;
             border-radius: 80px;
@@ -183,10 +170,9 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            font-family: 'Inter', 'Segoe UI', system-ui;
+            font-family: 'Inter', system-ui;
             transition: all 0.2s;
             letter-spacing: 0.5px;
-            backdrop-filter: blur(4px);
             box-shadow: 0 6px 0 #052013;
             transform: translateY(-2px);
         }
@@ -195,7 +181,6 @@
             box-shadow: 0 2px 0 #052013;
         }
 
-        /* ЗАГОЛОВКИ И ТЕКСТ */
         h1 {
             font-family: 'Orbitron', 'Inter', monospace;
             font-size: clamp(2.9rem, 12vw, 5rem);
@@ -215,8 +200,6 @@
             font-weight: 700;
             margin: 15px 0 8px;
             letter-spacing: 1px;
-            font-family: monospace;
-            backdrop-filter: blur(2px);
         }
         .only-android {
             color: #a5b9ff;
@@ -227,7 +210,6 @@
             padding-left: 12px;
         }
 
-        /* СЕТКА КАРТОЧЕК ФУНКЦИЙ (темнее) */
         .functions {
             display: flex;
             flex-direction: column;
@@ -235,7 +217,7 @@
             margin: 30px 0 40px;
         }
         .func-card {
-            background: rgba(10, 10, 25, 0.65);
+            background: rgba(10, 10, 25, 0.7);
             backdrop-filter: blur(3px);
             border-radius: 28px;
             padding: 16px 20px;
@@ -243,29 +225,26 @@
             justify-content: space-between;
             align-items: center;
             font-family: 'Inter', monospace;
-            border: 1px solid rgba(80, 110, 220, 0.2);
+            border: 1px solid rgba(80, 110, 220, 0.25);
             transition: 0.15s;
         }
         .func-card:active {
-            background: rgba(22, 22, 50, 0.8);
+            background: rgba(22, 22, 50, 0.85);
             transform: scale(0.99);
         }
         .func-name {
             color: #9cffd4;
             font-weight: 700;
             font-size: 1rem;
-            letter-spacing: 0.3px;
         }
         .func-action {
             color: #b9c6ff;
             font-size: 0.75rem;
-            font-weight: 400;
             background: rgba(0,0,0,0.4);
             padding: 4px 12px;
             border-radius: 30px;
         }
 
-        /* TERA внизу (большой градиентный текст) */
         .tera {
             text-align: center;
             margin-top: 70px;
@@ -277,7 +256,6 @@
             background-clip: text;
             color: transparent;
             letter-spacing: 8px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
         }
 
         .footer-note {
@@ -285,65 +263,38 @@
             margin-top: 30px;
             font-size: 0.68rem;
             color: rgba(170, 180, 250, 0.45);
-            font-weight: 400;
             border-top: 0.5px solid rgba(100,140,255,0.2);
             padding-top: 18px;
         }
 
-        /* АДАПТИВ ДЛЯ ТЕЛЕФОНА — убеждаемся, что градиент плавный */
         @media (max-width: 600px) {
             body {
-                background: linear-gradient(145deg, #0a0a1a 0%, #13112b 48%, #070611 100%);
+                background: linear-gradient(145deg, #0a0a1a 0%, #13112b 48%, #050410 100%);
                 background-attachment: fixed;
             }
-            .container {
-                padding: 60px 18px 90px;
-            }
-            .tg-circle {
-                width: 74px;
-                height: 74px;
-            }
-            .download-apk {
-                padding: 12px 26px;
-                font-size: 0.9rem;
-            }
-            .func-card {
-                padding: 14px 18px;
-            }
+            .container { padding: 60px 18px 90px; }
+            .tg-circle { width: 74px; height: 74px; }
+            .download-apk { padding: 12px 26px; font-size: 0.9rem; }
         }
-
-        /* для совсем маленьких */
         @media (max-width: 450px) {
-            .action-row {
-                gap: 18px;
-            }
-            .tg-circle {
-                width: 68px;
-                height: 68px;
-            }
-        }
-
-        /* доп безопасность: логотип телеграма всегда в круг */
-        .tg-circle img {
-            object-fit: cover;
+            .action-row { gap: 18px; }
+            .tg-circle { width: 68px; height: 68px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Бургер -->
     <div class="burger" id="burgerBtn">
         <span></span>
         <span></span>
         <span></span>
     </div>
 
-    <!-- Сайд-панель с информацией -->
     <div class="sidepanel" id="sidePanel">
         <button class="close-panel" id="closePanelBtn">✕</button>
         <h3>ForceNet</h3>
         <p>Приложение принадлежит компании <strong style="color:#b38eff">ForceNet</strong> из раздела продукции <strong style="color:#88aaff">Tera project</strong>.</p>
-        <p>Мощный инструмент с полным набором функций:</p>
+        <p>Хакерский инструмент с полным спектром возможностей:</p>
         <ul class="feature-list">
             <li>Шифровка файлов</li>
             <li>Дешифровка файлов</li>
@@ -356,23 +307,20 @@
     </div>
 
     <div class="container">
-        <!-- Круг логотипа Telegram + кнопка скачать -->
         <div class="action-row">
             <div class="tg-circle" id="tgCircle">
-                <!-- Использую SVG-иконку телеграма, которая идеально заполнит круг и не потеряет качество, но также с fallback -->
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.162c-.18 1.896-.96 6.502-1.354 8.627-.167.91-.496 1.203-.814 1.235-.692.07-1.218-.457-1.888-.896-1.05-.69-1.643-1.12-2.662-1.794-1.177-.78-.414-1.21.257-1.911.176-.184 3.234-2.964 3.294-3.215.007-.03.014-.142-.053-.2-.067-.06-.166-.04-.238-.023-.1.023-1.682 1.068-4.75 3.14-.45.31-.857.458-1.222.45-.402-.008-1.176-.228-1.752-.414-.706-.228-1.268-.35-1.22-.738.027-.204.306-.412.842-.624 1.392-.604 3.652-1.28 5.19-1.698 2.47-.672 2.983-.79 3.318-.794.09 0 .29.02.42.12.11.084.14.198.154.312.012.09.008.292-.01.476z'/%3E%3C/svg%3E"
-                     alt="Telegram"
-                     style="width: 100%; height: 100%; background: #1f293f; border-radius: 50%; padding: 16%; object-fit: contain;">
+                <!-- Пытаемся загрузить png, если нет — jpg. Расширения .png / .jpg из той же папки -->
+                <img src="tg.png" alt="Telegram" 
+                     onerror="this.onerror=null; this.src='tg.jpg';"
+                     style="width:100%; height:100%; object-fit:cover;">
             </div>
             <button class="download-apk" id="downloadBtn">⬇️ СКАЧАТЬ .APK</button>
         </div>
 
-        <!-- Хэдер -->
         <h1>ForceNet</h1>
         <div class="hack-badge">HACK TOOL // v.3.0</div>
         <div class="only-android">⚡ only android platform</div>
 
-        <!-- Карточки функций с активным действием (имитация) -->
         <div class="functions">
             <div class="func-card"><span class="func-name">⚡ Stress test</span><span class="func-action">нагрузка L7</span></div>
             <div class="func-card"><span class="func-name">🔒 Encrypt</span><span class="func-action">AES-256 шифровка</span></div>
@@ -382,24 +330,20 @@
             <div class="func-card"><span class="func-name">🕵️ OSINT</span><span class="func-action">email, username</span></div>
         </div>
 
-        <!-- Лого TERA -->
         <div class="tera">TERA</div>
         <div class="footer-note">ForceNet HACK TOOL // официальный канал в Telegram</div>
     </div>
 
     <script>
         (function() {
-            // Элементы управления
+            // Бургер меню
             const burger = document.getElementById('burgerBtn');
             const panel = document.getElementById('sidePanel');
             const closeBtn = document.getElementById('closePanelBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const tgCircle = document.getElementById('tgCircle');
 
-            // Открыть/закрыть меню (улучшенная мобильная поддержка)
             function openPanel() {
                 panel.classList.add('open');
-                document.body.style.overflow = 'hidden'; // блокируем прокрутку фона
+                document.body.style.overflow = 'hidden';
             }
             function closePanel() {
                 panel.classList.remove('open');
@@ -407,74 +351,60 @@
             }
             if (burger) burger.addEventListener('click', openPanel);
             if (closeBtn) closeBtn.addEventListener('click', closePanel);
-            // Закрытие по клику на оверлей (чтобы было удобнее на телефоне)
             panel.addEventListener('click', (e) => {
                 if (e.target === panel) closePanel();
             });
 
-            // Функция для .apk скачивания (имитация файла, генерируем бинарник .apk, но сохраняем как заглушку)
-            // Чтобы не было ошибки 404, создаём виртуальный APK с данными (просто небольшой текстовый контент для демо, но пользователь получит .apk файл)
+            // КНОПКА СКАЧИВАНИЯ — берёт ФАЙЛ "HACK TOOL.apk" из той же папки, что и HTML
+            const downloadBtn = document.getElementById('downloadBtn');
             downloadBtn.addEventListener('click', () => {
-                // Создаём подставной .apk файл (в реальном проекте тут будет ссылка на сервер)
-                // Но чтоб при клике точно скачивался .apk файл, используем Blob, и генерируем бинарник с сигнатурой "fake apk"
-                // Уведомление + скачивание для демонстрации
-                const fakeApkContent = "Это демонстрационный APK файл ForceNet. В реальном приложении тут будет установочный пакет.";
-                const blob = new Blob([fakeApkContent], { type: 'application/vnd.android.package-archive' });
+                // Прямая ссылка на APK файл, лежащий в той же директории
+                const apkPath = 'HACK TOOL.apk';
+                
+                // Создаём ссылку для принудительного скачивания
                 const link = document.createElement('a');
-                const url = URL.createObjectURL(blob);
-                link.href = url;
-                link.download = 'ForceNet_HACK_TOOL.apk';
+                link.href = apkPath;
+                link.download = 'HACK TOOL.apk';   // сохраняется с этим именем
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                URL.revokeObjectURL(url);
                 
-                // Опционально визуальный фидбек
+                // Визуальный фидбек
                 downloadBtn.style.transform = "scale(0.97)";
                 setTimeout(() => { downloadBtn.style.transform = ""; }, 120);
             });
 
-            // ТЕЛЕГРАМ — полный круг с логотипом, переход на канал @ForceNetProject
-            tgCircle.addEventListener('click', (e) => {
-                e.preventDefault();
+            // Круг телеграма — переход в канал
+            const tgCircle = document.getElementById('tgCircle');
+            tgCircle.addEventListener('click', () => {
                 window.open('https://t.me/ForceNetProject', '_blank');
             });
 
-            // Анимация при наведении / тапе на карточки функций (необязательно, но для отклика)
+            // Лёгкий фидбек на карточках функций
             const funcCards = document.querySelectorAll('.func-card');
             funcCards.forEach(card => {
                 card.addEventListener('click', () => {
-                    // Просто маленькая анимация, имитация выбора функции (чисто ui)
                     card.style.transform = 'scale(0.98)';
                     setTimeout(() => { card.style.transform = ''; }, 100);
-                    // Всплывающее уведомление (сообщение на мобильных)
-                    if (window.innerWidth < 700) {
-                        // легкий тактильный отклик без спама
-                        const funcNameSpan = card.querySelector('.func-name');
-                        let msg = funcNameSpan ? funcNameSpan.innerText : 'функция';
-                        // Можно показать уведомление о том, что функция доступна в приложении
-                        const toast = document.createElement('div');
-                        toast.innerText = `⚙️ ${msg} доступно в ForceNet APK`;
-                        toast.style.position = 'fixed';
-                        toast.style.bottom = '30px';
-                        toast.style.left = '20px';
-                        toast.style.right = '20px';
-                        toast.style.backgroundColor = '#0f172ad9';
-                        toast.style.backdropFilter = 'blur(12px)';
-                        toast.style.color = '#d0e2ff';
-                        toast.style.padding = '12px 18px';
-                        toast.style.borderRadius = '60px';
-                        toast.style.fontSize = '0.85rem';
-                        toast.style.textAlign = 'center';
-                        toast.style.fontFamily = 'Inter, system-ui';
-                        toast.style.zIndex = '2000';
-                        toast.style.border = '1px solid #4a6eff';
-                        document.body.appendChild(toast);
-                        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 1500);
-                    } else {
-                        // для десктопа просто мелкая консоль
-                        console.log('Функция доступна в скачанном APK');
-                    }
+                    const msgSpan = card.querySelector('.func-name');
+                    let text = msgSpan ? msgSpan.innerText : 'функция';
+                    const toast = document.createElement('div');
+                    toast.innerText = `⚙️ ${text} — доступно в APK`;
+                    toast.style.position = 'fixed';
+                    toast.style.bottom = '30px';
+                    toast.style.left = '20px';
+                    toast.style.right = '20px';
+                    toast.style.backgroundColor = '#0f172ad9';
+                    toast.style.backdropFilter = 'blur(12px)';
+                    toast.style.color = '#d0e2ff';
+                    toast.style.padding = '12px 18px';
+                    toast.style.borderRadius = '60px';
+                    toast.style.fontSize = '0.85rem';
+                    toast.style.textAlign = 'center';
+                    toast.style.zIndex = '2000';
+                    toast.style.border = '1px solid #4a6eff';
+                    document.body.appendChild(toast);
+                    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 1500);
                 });
             });
         })();
